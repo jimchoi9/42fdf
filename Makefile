@@ -3,7 +3,7 @@ CFLAG = -Wall -Wextra -Werror
 NAME = test1
 LIBFT_DIR = ./libft/
 LIBFT_NAME = libft.a
-SRCS = test.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
+SRCS = test.c parsing.c bresenham.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 OBJS = $(SRCS:.c=.o)
 
 MLXDIR = ./minilibx_mms_20210621
