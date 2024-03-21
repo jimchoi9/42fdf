@@ -6,23 +6,14 @@
 /*   By: jimchoi <jimchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:21:49 by jimchoi           #+#    #+#             */
-/*   Updated: 2024/03/20 21:32:06 by jimchoi          ###   ########.fr       */
+/*   Updated: 2024/03/21 18:32:09 by jimchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "fdf.h"
 
-typedef struct s_idx
-{
-	int x;
-	int y;
-	int z;
-	char *color;
-}		t_idx;
-
-
-void	parsing(char *argv[])
+t_map	*parsing(char *argv[])
 {
 	// atexit(check_leaks);
 	char *line = "test";
@@ -56,7 +47,12 @@ void	parsing(char *argv[])
 
 	close(fd);
 
-	t_idx map[y_len][x_len];
+	t_map *map=malloc(sizeof(t_map));
+	map->width=x_len;
+	map->height=y_len;
+	map->points=(t_point **)malloc(sizeof(t_point *) * map->height);
+	for(i=0;i<map->height;i++)
+	    map->points[i]=(t_point *)malloc(sizeof(t_point) * map->width);
 	fd = open(argv[1], O_RDONLY);
 
 
@@ -69,9 +65,9 @@ void	parsing(char *argv[])
 		while(j < x_len)
 		{
 
-			map[i][j].x = j;
-			map[i][j].y = i;
-			map[i][j].z = ft_atoi(str[j]);
+			map->points[i][j].x = x_len-1-j ;
+			map->points[i][j].y= y_len - 1-i;
+			map->points[i][j].z= ft_atoi(str[j]);
 			j++;
 		
 		}
@@ -81,16 +77,10 @@ void	parsing(char *argv[])
 	{
 		for(int j = 0; j < x_len; j++)
 		{
-            printf("%d ", map[i][j].z);
+            printf("%d ", map->points[i][j].z);
         }
 		printf("\n");
 	}
 
-
-				// printf("%c  ", str[0]);
-				// printf("%s  ", str[0]);
-
-	// free(str);
-	// }
-	return;
+	return (map);
 }

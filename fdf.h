@@ -6,7 +6,7 @@
 /*   By: jimchoi <jimchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:18:23 by jimchoi           #+#    #+#             */
-/*   Updated: 2024/03/20 16:55:54 by jimchoi          ###   ########.fr       */
+/*   Updated: 2024/03/21 11:32:09 by jimchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,23 @@ typedef struct s_data
 	int		endian;
 }		t_data;
 
+typedef struct s_point
+{
+	int x;
+	int y;
+	int z;
+	unsigned int color;
+}		t_point;
 
-void	parsing(char *argv[]);
+typedef struct s_map
+{
+	int width;
+	int height;
+	t_point **points;
+}		t_map;
+
+
+t_map	*parsing(char *argv[]);
 void bresenham(int x1, int y1, int x2, int y2, t_data image, int color);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 #endif

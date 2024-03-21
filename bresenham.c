@@ -6,7 +6,7 @@
 /*   By: jimchoi <jimchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:53 by jimchoi           #+#    #+#             */
-/*   Updated: 2024/03/20 20:30:11 by jimchoi          ###   ########.fr       */
+/*   Updated: 2024/03/21 16:53:06 by jimchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void bresenham(int x1, int y1, int x2, int y2, t_data image, int color)
 				y += addy;
                 count -= dx;
 			}
-			printf("x = %d, y = %d\n", x, y);
-			my_mlx_pixel_put(&image,x, y , color);
+			// printf("x = %d, y = %d\n", x, y);
+			my_mlx_pixel_put(&image,x + 400, y + 400, color);
 
 		}
     }
@@ -96,8 +96,8 @@ void bresenham(int x1, int y1, int x2, int y2, t_data image, int color)
                 x += addx;
                 count -= dy;
             }
-            printf("x = %d, y = %d\n", x,y);
-			my_mlx_pixel_put(&image,x, y , color);
+            // printf("x = %d, y = %d\n", x,y);
+			my_mlx_pixel_put(&image,x + 200, y + 200, color);
 		}
     }
 }

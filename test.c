@@ -10,19 +10,14 @@ void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
 }
 
 
-void print_pixel(t_data image)
+void print_pixel(t_data image, double t, unsigned int color)
 {
-	double theta = 3.14/3.0;
+	double theta = 3.14/t;
 	int m = 250;
 	int x1= 0;
 	int y1= 0;
 	int x2= 200;
-	int y2= 100;
-
-	// x1 += m;
-	// y1 += m;
-	// x2 += m;
-	// y2 += m;
+	int y2= 200;
 	
 	bresenham(x1, y1, x1, y2, image, 0xff0000);
 	bresenham(x1, y1, x2, y1, image, 0xff0000);
@@ -31,17 +26,64 @@ void print_pixel(t_data image)
 
 
 
-	bresenham(x1, y1, (x1 * cos(theta) - y2 * sin(theta)), (x1 * sin(theta) + y2 * cos(theta)) , image, 0xff00f0);
-	bresenham(x1, y1, (x2 * cos(theta) - y1 * sin(theta)), (x2 * sin(theta) + y1 * cos(theta)), image, 0xff00f0);
-	bresenham((x2 * cos(theta) - y2 * sin(theta)),(x2 * sin(theta) + y2 * cos(theta)), (x2 * cos(theta) - y1 * sin(theta)), (x2 * sin(theta) + y1 * cos(theta)), image, 0xff00f0);
-	bresenham((x1 * cos(theta) - y2 * sin(theta)),(x1 * sin(theta) + y2 * cos(theta)), (x2 * cos(theta) - y2 * sin(theta)),(x2 * sin(theta) + y2 * cos(theta)), image, 0xff00f0);
+	bresenham(x1, y1, (x1 * cos(theta) - y2 * sin(theta)), (x1 * sin(theta) + y2 * cos(theta)) , image, color);
+	bresenham(x1, y1, (x2 * cos(theta) - y1 * sin(theta)), (x2 * sin(theta) + y1 * cos(theta)), image, color);
+	bresenham((x2 * cos(theta) - y2 * sin(theta)),(x2 * sin(theta) + y2 * cos(theta)), (x2 * cos(theta) - y1 * sin(theta)), (x2 * sin(theta) + y1 * cos(theta)), image,color);
+	bresenham((x1 * cos(theta) - y2 * sin(theta)),(x1 * sin(theta) + y2 * cos(theta)), (x2 * cos(theta) - y2 * sin(theta)),(x2 * sin(theta) + y2 * cos(theta)), image, color);
 
+
+}
+
+
+
+
+
+void draw_map(t_data image, t_map *map, unsigned int color)
+{
+	int i = 0;
+    int j = 0;
+	int dx;
+	int dy;
+	int a = 60;
+    while (i < map->height)
+    {
+        while (j < map->width)
+        {
+				dx = map->points[i][j].x * 20;
+				dy = map->points[i][j].y * 20;
+				dx = (dx - dy)*cos(a);
+				dy = (map->points[i][j].x * 20 + dy)*sin(a) - map->points[i][j].z ;
+				map->points[i][j].x = dx;
+				map->points[i][j].y = dy;
+            j++;
+        }
+        i++;
+        j = 0;
+    }
+	i = 0;
+	j = 0;
+    while (i < map->height)
+    {
+        while (j < map->width)
+        {
+			dx = map->points[i][j].x;
+			dy = map->points[i][j].y ;
+				if (j < map->width - 1)
+					bresenham(dx, dy, map->points[i][j + 1].x,map->points[i][j + 1].y, image, 0xffff00);
+				if (i < map->height -1)
+					bresenham(dx, dy, map->points[i + 1][j].x, map->points[i + 1][j].y, image, 0xffff00);
+            j++;
+        }
+        i++;
+        j = 0;
+    }
 }
 
 int main(int argc, char *argv[])
 {
 	int	fd;
 	char	*str;
+	t_map *map;
 
 	if (argc != 2)
 		printf("ㅇㅔ러메세지 출력 후 종료");
@@ -55,52 +97,15 @@ int main(int argc, char *argv[])
 	t_data	image;
 
 
-	parsing(argv);
+	map = parsing(argv);
 
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 555, 555, "Hellow World!");
-	image.img = mlx_new_image(mlx_ptr, 555, 555); // 이미지 객체 생성
+	win_ptr = mlx_new_window(mlx_ptr, 1000, 1000, "Hellow World!");
+	image.img = mlx_new_image(mlx_ptr, 1000, 1000); // 이미지 객체 생성
 	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
-	// double theta = 3.14 / 3.0;
-	// int x1 = 0;
-	// int y1 = 0;
-	// int x2 = 100;
-	// int y2 = 400;
-	// bresenham(0 , 0, x, 0, image);
-	// bresenham(250 , 0, 250, 500, image, 0x00FF00);
-	// bresenham(0,250, 500,250, image, 0x00FF00);
-	print_pixel(image);
-	// bresenham(250,250, ,  image);
-	// bresenham(250 , 250, x, y, image);
-	// bresenham(250 + x1, 250 + y1, 250 + x2, ((x2)*sin(theta)+(y2)*cos(theta)), image,  0xff0000);
-	// x2 = 200;
-	// bresenham(250 + x1, 250 + y1, 250 + x2, ((x2)*sin(theta)+(y2)*cos(theta)), image, -677);
-	// bresenham(250 , 250, 250 - x2, ((x2)*sin(theta)+(y2)*cos(theta)), image);
-	// for(int i = 0; i <=100; i++)
-	// {
-	// 	if (i % 10 == 0)
-	// 	{
-	// 		// my_mlx_pixel_put(&image, 250 + x1 +i, 250 + y1 , 0xff0000);
-	// 		my_mlx_pixel_put(&image, 250 +x1 +i,i+ ((x1)*sin(theta)+(y2)*cos(theta)), 0xff0000);
-	// 		my_mlx_pixel_put(&image, 250 +x1 +i,i+ ((x1)*sin(theta)+(y2)*cos(theta)) + 1, 0xff0000);
-	// 	}
-	// }
-	// bresenham(250 , 250, (x* cos(theta) - (y) * sin(theta)), ((x)*sin(theta)+(y)*cos(theta)), image);
-	// bresenham(100, 100, 200, 50, image);
-	// double x = 0;
-	// double y = 0;
-	// // for (int i = 0 ; i <= 200 ; i++)
-	// {
-		
-	// 	for (int j = 0 ; j <= 200 ; j++)
-	// 	{
-	// 		// if (i % 20 == 0 || j % 20 == 0)
-	// 		{
-	// 		my_mlx_pixel_put(&image, x + j, y,  0x00FF00 );
-	// 		my_mlx_pixel_put(&image, ((x + j)* cos(theta) - (y) * sin(theta)), ((x+j)*sin(theta)+(y)*cos(theta)),  0x00FF00);
-	// 		}
-	// 	}
-	// }
+
+
+	draw_map(image, map, 0xff0000); 
 
 	mlx_put_image_to_window(mlx_ptr, win_ptr, image.img, 5, 5);
 	mlx_loop(mlx_ptr);
