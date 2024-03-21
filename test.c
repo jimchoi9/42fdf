@@ -44,15 +44,15 @@ void draw_map(t_data image, t_map *map, unsigned int color)
     int j = 0;
 	int dx;
 	int dy;
-	int a = 60;
+	double a = 45.0f * 3.141592 / 180;
     while (i < map->height)
     {
         while (j < map->width)
         {
-				dx = map->points[i][j].x * 20;
-				dy = map->points[i][j].y * 20;
+				dx = map->points[i][j].x * 15;
+				dy = map->points[i][j].y* 15;
 				dx = (dx - dy)*cos(a);
-				dy = (map->points[i][j].x * 20 + dy)*sin(a) - map->points[i][j].z ;
+				dy = (map->points[i][j].x * 5 + dy)*sin(a) - map->points[i][j].z * 5;
 				map->points[i][j].x = dx;
 				map->points[i][j].y = dy;
             j++;

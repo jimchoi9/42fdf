@@ -6,7 +6,7 @@
 /*   By: jimchoi <jimchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:21:49 by jimchoi           #+#    #+#             */
-/*   Updated: 2024/03/21 18:32:09 by jimchoi          ###   ########.fr       */
+/*   Updated: 2024/03/21 18:40:49 by jimchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ t_map	*parsing(char *argv[])
 		while(j < x_len)
 		{
 
-			map->points[i][j].x = x_len-1-j ;
-			map->points[i][j].y= y_len - 1-i;
+			map->points[i][j].x =j ;
+			map->points[i][j].y= i;
 			map->points[i][j].z= ft_atoi(str[j]);
 			j++;
 		
