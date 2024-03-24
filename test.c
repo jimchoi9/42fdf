@@ -1,6 +1,9 @@
 #include "fdf.h"
 //export DYLD_LIBRARY_PATH=/Users/jimchoi/Desktop/sub/42fdf/minilibx_mms_20210621
 //원하는 좌표에 해당하는 주소에 color값을 넣는 함수
+//  - x누르면 종료
+// -출력 위치조정
+// -맵 크기조정?
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
