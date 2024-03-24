@@ -6,7 +6,7 @@
 /*   By: jimchoi <jimchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:53 by jimchoi           #+#    #+#             */
-/*   Updated: 2024/03/21 18:43:40 by jimchoi          ###   ########.fr       */
+/*   Updated: 2024/03/22 20:10:13 by jimchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@
 	// 		}
 	// 	}
 	// }
+
+// int get_pixel(t_map *map)
+// {
+// 	int y = map->height / 2;
+// 	int x = map->width / 2;
+	
+// }
 
 void bresenham(int x1, int y1, int x2, int y2, t_data image, int color)
 {
@@ -57,7 +64,6 @@ void bresenham(int x1, int y1, int x2, int y2, t_data image, int color)
 	// printf("x: %d, y: %d\n", x, y);
 	if (dx >= dy)
     {
-		printf("xxxx");
 		for(int i = 0; i < dx; i++)
 		{
 			//x를 1증가 시키고 dy만큼 count 증가
@@ -80,7 +86,6 @@ void bresenham(int x1, int y1, int x2, int y2, t_data image, int color)
 	//dx < dy 일 경우 (기울기 > 1) x의 조건이 만족하면 y를 1 증가시킨다
     else
     {
-		printf("yyyy");
         for(int i=0; i<dy; i++)
 		{
 			

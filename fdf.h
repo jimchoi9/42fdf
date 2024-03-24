@@ -6,7 +6,7 @@
 /*   By: jimchoi <jimchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:18:23 by jimchoi           #+#    #+#             */
-/*   Updated: 2024/03/21 11:32:09 by jimchoi          ###   ########.fr       */
+/*   Updated: 2024/03/22 21:09:23 by jimchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include <fcntl.h>
 #include <math.h>
 #include <stdio.h>
+
+
 
 //이미지의 정보를 나타내는 변수를 저장한 구조체
 typedef struct s_data

@@ -7,13 +7,16 @@ SRCS = test.c parsing.c bresenham.c ./get_next_line/get_next_line.c ./get_next_l
 OBJS = $(SRCS:.c=.o)
 
 MLXDIR = ./minilibx_mms_20210621
-MLXFLAG = -L$(MLXDIR) -L $(LIBFT_DIR) -lmlx -lft -framework OpenGL -framework AppKit
-
+MLXFLAG = -L $(MLXDIR) -lmlx -L $(LIBFT_DIR)  -lft -framework OpenGL -framework AppKit
+LIBMLXDIR = /Users/jimchoi/Desktop/sub/42fdf/minilibx_mms_20210621
 .PHONY: all
 all: $(NAME)
 
+
 $(NAME): $(OBJS)
+
 	make -s -C $(MLXDIR)
+	cp ./$(MLXDIR)/libmlx.dylib ./libmlx.dylib
 	make -C $(LIBFT_DIR)
 	$(CC) $(CFLAG) $(OBJS) $(MLXFLAG) -o $(NAME)
 

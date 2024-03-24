@@ -6,7 +6,7 @@
 /*   By: jimchoi <jimchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:21:49 by jimchoi           #+#    #+#             */
-/*   Updated: 2024/03/21 18:40:49 by jimchoi          ###   ########.fr       */
+/*   Updated: 2024/03/22 18:01:04 by jimchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ t_map	*parsing(char *argv[])
 		}
 		i++;
 	}
-	for(int i = 0; i < y_len; i++)
-	{
-		for(int j = 0; j < x_len; j++)
-		{
-            printf("%d ", map->points[i][j].z);
-        }
-		printf("\n");
-	}
+	// for(int i = 0; i < y_len; i++)
+	// {
+	// 	for(int j = 0; j < x_len; j++)
+	// 	{
+    //         printf("%d ", map->points[i][j].z);
+    //     }
+	// 	printf("\n");
+	// }
 
 	return (map);
 }

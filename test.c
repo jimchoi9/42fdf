@@ -44,7 +44,7 @@ void draw_map(t_data image, t_map *map, unsigned int color)
     int j = 0;
 	int dx;
 	int dy;
-	double a = 45.0f * 3.141592 / 180;
+	double a = 30 * 3.141592 / 180;
     while (i < map->height)
     {
         while (j < map->width)
@@ -52,7 +52,7 @@ void draw_map(t_data image, t_map *map, unsigned int color)
 				dx = map->points[i][j].x * 15;
 				dy = map->points[i][j].y* 15;
 				dx = (dx - dy)*cos(a);
-				dy = (map->points[i][j].x * 5 + dy)*sin(a) - map->points[i][j].z * 5;
+				dy = (map->points[i][j].x * 15 + dy)*sin(a) - map->points[i][j].z * 15;
 				map->points[i][j].x = dx;
 				map->points[i][j].y = dy;
             j++;
@@ -79,6 +79,15 @@ void draw_map(t_data image, t_map *map, unsigned int color)
     }
 }
 
+
+int key_press(int keycode)
+{
+	if (keycode == 53)
+        exit(0);
+	return (0);
+}
+
+
 int main(int argc, char *argv[])
 {
 	int	fd;
@@ -103,7 +112,7 @@ int main(int argc, char *argv[])
 	win_ptr = mlx_new_window(mlx_ptr, 1000, 1000, "Hellow World!");
 	image.img = mlx_new_image(mlx_ptr, 1000, 1000); // 이미지 객체 생성
 	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
-
+	mlx_hook(win_ptr, 2, 0, &key_press, 0);
 
 	draw_map(image, map, 0xff0000); 
 
