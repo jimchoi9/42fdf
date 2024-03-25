@@ -13,29 +13,7 @@
 
 #include "fdf.h"
 
-	// double x = 0;
-	// double y = 0;
-	// double theta = 3.14 / 4.0;
-	// for (int i = 0 ; i <= 200 ; i++)
-	// {
-	// 	for (int j = 0 ; j <= 200 ; j++)
-	// 	{
-	// 		if (i % 20 == 0 || j % 20 == 0)
-	// 		{
-	// 		my_mlx_pixel_put(&image, x + j + 100, y + i + 100,  0x00FF00 * i);
-	// 		my_mlx_pixel_put(&image, ((x + j)* cos(theta) - (y+i) * sin(theta))+ 200, ((x+j)*sin(theta)+(y+i)*cos(theta)),  0x00FF00* i);
-	// 		}
-	// 	}
-	// }
-
-// int get_pixel(t_map *map)
-// {
-// 	int y = map->height / 2;
-// 	int x = map->width / 2;
-	
-// }
-
-void bresenham(int x1, int y1, int x2, int y2, t_data image, int color)
+void bresenham(int x1, int y1, int x2, int y2, t_data image)
 {
 	int addx, addy;
 	int count = 0;
@@ -79,7 +57,8 @@ void bresenham(int x1, int y1, int x2, int y2, t_data image, int color)
                 count -= dx;
 			}
 			// printf("x = %d, y = %d\n", x, y);
-			my_mlx_pixel_put(&image,x + 400, y + 400, color);
+			if (x < 1000 || y  < 1000 || x < 0 || y < 0)
+				my_mlx_pixel_put(&image,x , y , 0xffffff);
 
 		}
     }
@@ -102,7 +81,8 @@ void bresenham(int x1, int y1, int x2, int y2, t_data image, int color)
                 count -= dy;
             }
             // printf("x = %d, y = %d\n", x,y);
-			my_mlx_pixel_put(&image,x + 400, y + 400, color);
+			if (x < 1000 || y  < 1000 || x < 0 || y < 0)
+				my_mlx_pixel_put(&image,x , y , 0xffffff);
 		}
     }
 }

@@ -52,6 +52,6 @@ typedef struct s_map
 
 
 t_map	*parsing(char *argv[]);
-void bresenham(int x1, int y1, int x2, int y2, t_data image, int color);
+void bresenham(int x1, int y1, int x2, int y2, t_data image);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 #endif
