@@ -1,11 +1,6 @@
 #include "fdf.h"
-//export DYLD_LIBRARY_PATH=/Users/jimchoi/Desktop/sub/42fdf/minilibx_mms_20210621
 
-
-// -출력 위치조정
-// -맵 크기조정?
-
-void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -13,6 +8,23 @@ void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+void	make_center(t_map *map, int w, int h)
+{
+	int i = 0; 
+	int j = 0;
+
+	while (i < map->height)
+    {
+        while (j < map->width)
+        {
+			map->points[i][j].x += w;
+			map->points[i][j].y += h;
+            j++;
+        }
+        i++;
+        j = 0;
+    }
+}
 
 void	convert_isometric(t_map *map, int gap)
 {
@@ -21,13 +33,13 @@ void	convert_isometric(t_map *map, int gap)
 	int dx;
 	int dy;
 
-	int center = 500 - (map->height / 2 * gap);
-	if (map->width > map->height)
-		center = 500 - (map->width / 2*gap);
-	double a = 30 * 3.141592 / 180;
-
-	// gap = () ;
-	// gap = 10;
+	gap = 1920 / 3 / map->width;
+	int dz = 1080/2 / map->max_z / 15;
+	if (1080/2 < map->max_z * gap)
+	{
+		printf("잘림\n");
+	}
+	double a = 3.14/6;
 
     while (i < map->height)
     {
@@ -36,20 +48,16 @@ void	convert_isometric(t_map *map, int gap)
 				dx = map->points[i][j].x * gap;
 				dy = map->points[i][j].y * gap ;
 				dx = (dx - dy)*cos(a);
-				dy = (map->points[i][j].x * gap + dy)*sin(a) - map->points[i][j].z ;
-				// map->points[i][j].x = dx ;
-				// map->points[i][j].y = dy ;
-				map->points[i][j].x = dx + center;
-				map->points[i][j].y = dy + center;
+				dy = (map->points[i][j].x * gap + dy)*sin(a) - map->points[i][j].z * 2;
+				map->points[i][j].x = dx;
+				map->points[i][j].y = dy;
             j++;
         }
         i++;
         j = 0;
     }
-
+		make_center(map, 1920/2 - map->points[map->height/2][map->width/2].x ,1080/2 - map->points[map->height/2][map->width/2].y );
 }
-
-
 
 void draw_map(t_data image, t_map *map, unsigned int color)
 {
@@ -77,7 +85,6 @@ void draw_map(t_data image, t_map *map, unsigned int color)
     }
 }
 
-
 int key_press(int keycode)
 {
 	if (keycode == 53)
@@ -93,33 +100,24 @@ int exit_key()
 
 int main(int argc, char *argv[])
 {
-	int		fd;
 	char	*str;
-	t_map *map;
-
-	if (argc != 2)
-		printf("ㅇㅔ러메세지 출력 후 종료");
-	str = ft_strchr(argv[1], '.');
-	if (ft_strncmp(str, ".fdf", 5) != 0)
-		printf("에러메세지 출력 후 종료");
-
-
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_map *map;
 	t_data	image;
 
-
+	if (argc != 2)
+		printf("argc = %d\n", argc);
+	str = ft_strrchr(argv[1], '.');
+	if (ft_strncmp(str, ".fdf", 3) != 0)
+		printf("str=%s.\nfdf=%s.\n에러메세지 출력 후 종료", str, ".fdf");
 	map = parsing(argv);
-
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 1000, 1000, "Hellow World!");
-	image.img = mlx_new_image(mlx_ptr, 1000, 1000); // 이미지 객체 생성
+	win_ptr = mlx_new_window(mlx_ptr, 1920, 1080, "Hellow World!");
+	image.img = mlx_new_image(mlx_ptr, 1920, 1080); // 이미지 객체 생성
 	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
 	mlx_hook(win_ptr, 2, 0, &key_press, 0);
 	mlx_hook(win_ptr, 17, 0, &exit_key, 0);
-
-
-	// convert_isometric(map, 100/map->width);
 	convert_isometric(map, 10);
 	draw_map(image, map, 0xff0000); 
 

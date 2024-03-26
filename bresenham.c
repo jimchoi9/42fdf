@@ -6,7 +6,7 @@
 /*   By: jimchoi <jimchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:53 by jimchoi           #+#    #+#             */
-/*   Updated: 2024/03/22 20:10:13 by jimchoi          ###   ########.fr       */
+/*   Updated: 2024/03/26 19:59:48 by jimchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void bresenham(int x1, int y1, int x2, int y2, t_data image)
 	int dx = x2 - x1;
 	int dy = y2 - y1;
 
-	//음수방향
+//	음수방향
 	if (dx < 0)
     {
         dx = -dx;
@@ -57,7 +57,7 @@ void bresenham(int x1, int y1, int x2, int y2, t_data image)
                 count -= dx;
 			}
 			// printf("x = %d, y = %d\n", x, y);
-			if (x < 1000 || y  < 1000 || x < 0 || y < 0)
+			if (x < 1920 && y  < 1080 && x >= 0 && y >= 0)
 				my_mlx_pixel_put(&image,x , y , 0xffffff);
 
 		}
@@ -81,7 +81,7 @@ void bresenham(int x1, int y1, int x2, int y2, t_data image)
                 count -= dy;
             }
             // printf("x = %d, y = %d\n", x,y);
-			if (x < 1000 || y  < 1000 || x < 0 || y < 0)
+			if (x < 1920 && y  < 1080 && x >= 0 && y >= 0)
 				my_mlx_pixel_put(&image,x , y , 0xffffff);
 		}
     }
