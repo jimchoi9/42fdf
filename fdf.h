@@ -6,7 +6,7 @@
 /*   By: jimchoi <jimchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:18:23 by jimchoi           #+#    #+#             */
-/*   Updated: 2024/03/26 20:08:32 by jimchoi          ###   ########.fr       */
+/*   Updated: 2024/03/27 19:35:28 by jimchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,22 @@ typedef struct s_map
 	t_point **points;
 }		t_map;
 
+typedef struct s_xy{
+	int	x1;
+    int	y1;
+	int	x2;
+	int	y2;
+} t_xy;
+
+typedef struct s_linedata{
+	int	w;
+    int	h;
+	int	add_x;
+	int	add_y;
+} t_linedata;
 
 t_map	*parsing(char *argv[]);
-void bresenham(int x1, int y1, int x2, int y2, t_data image);
+void bresenham(t_xy xy, int x2, int y2, t_data image);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	b2(t_xy xy, int x2, int y2, t_data image);
 #endif
