@@ -6,7 +6,7 @@
 /*   By: jimchoi <jimchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:21:49 by jimchoi           #+#    #+#             */
-/*   Updated: 2024/03/27 20:49:45 by jimchoi          ###   ########.fr       */
+/*   Updated: 2024/03/28 21:51:30 by jimchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,23 @@ int is_valid_map(char *argv[], int fd, t_map *map)
 	return (1);
 }
 
-t_map	*file_open(char *argv[])
-{
-	int		fd;
-	int		i;
-	t_map	*map;
+// t_map	*file_open(char *argv[])
+// {
+// 	int		fd;
+// 	int		i;
+// 	t_map	*map;
 
-	i = -1;
-	fd = open(argv[1], O_RDONLY);
-	if(fd == -1)
-		exit (1);
-	is_valid_map(argv,fd, map);
-	map->points=(t_point **)malloc(sizeof(t_point *) * map->height);
-	while(++i < map->height)
-	    map->points[i]=(t_point *)malloc(sizeof(t_point) * map->width);
+// 	i = -1;
+// 	fd = open(argv[1], O_RDONLY);
+// 	if(fd == -1)
+// 		exit (1);
+// 	is_valid_map(argv,fd, map);
+// 	map->points=(t_point **)malloc(sizeof(t_point *) * map->height);
+// 	while(++i < map->height)
+// 	    map->points[i]=(t_point *)malloc(sizeof(t_point) * map->width);
 	
-	return (map);
-}
+// 	return (map);
+// }
 
 t_map	*parsing(char *argv[])
 {
@@ -87,7 +87,10 @@ t_map	*parsing(char *argv[])
 			map->points[i][j].x =j;
 			map->points[i][j].y= i;
 			map->points[i][j].z= ft_atoi(str[j]);
+			free(str[j]);
 		}
+		free(str);
+		free(line);
 	}
 	return (map);
 }

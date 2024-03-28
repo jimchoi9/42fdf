@@ -6,7 +6,7 @@
 /*   By: jimchoi <jimchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:37:22 by jimchoi           #+#    #+#             */
-/*   Updated: 2024/03/27 20:51:53 by jimchoi          ###   ########.fr       */
+/*   Updated: 2024/03/28 21:58:23 by jimchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ int exit_key()
 	exit(0);
 }
 
-
+void check_leaks(void) 
+{ system("leaks test1"); } 
 int main(int argc, char *argv[])
 {
 	char	*str;
@@ -114,6 +115,7 @@ int main(int argc, char *argv[])
 	void	*win_ptr;
 	t_map *map;
 	t_data	image;
+	atexit(check_leaks);
 
 	if (argc != 2)
 		printf("argc = %d\n", argc);
@@ -133,7 +135,12 @@ int main(int argc, char *argv[])
 	mlx_put_image_to_window(mlx_ptr, win_ptr, image.img, 5, 5);
 	mlx_loop(mlx_ptr);
 	
-	return (0);
+	// int i = -1;
+	// while(++i < map->height)
+	//     free(map->points[i]);
+	// free(map->points);
+	// free(map);
+
+	exit (0);
 }
-void check_leaks(void)
-{ system("leaks test1"); } 
+

@@ -1,5 +1,5 @@
 CC = gcc
-CFLAG = -fsanitize=address -Wall -Wextra -Werror
+CFLAG = -Wall -Wextra -Werror
 NAME = test1
 LIBFT_DIR = ./libft/
 LIBFT_NAME = libft.a
@@ -32,6 +32,7 @@ clean:
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
 	rm -f $(NAME)
+	rm -f libmlx.dylib
 
 re: fclean all
 

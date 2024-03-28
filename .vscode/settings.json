@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"get_next_line.h": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"mlx.h": "c"
 	}
 }
